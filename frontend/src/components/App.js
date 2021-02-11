@@ -5,15 +5,16 @@ import { Component } from 'react';
 class App extends Component {
   constructor(props) {
     super(props);
+    console.log(process.env);
     this.state = {
-      api: {                                // This is the nginx listener information that automatically
-        protocol: 'http',                   // adds the apiKey and applicationKey to each request
-        port: '3000',                       // So we don't have to expose them in browser-side code
-        host: 'wx.hacksbrain.com',          // See the "README.md" for details
-        devices: { endpoint: 'devices' },
-        apiVersion: '1',
+      api: {                                    // This is the backend listener
+        protocol: process.env.REACT_APP_PROTO,
+        port: process.env.REACT_APP_PORT,
+        host: process.env.REACT_APP_HOST,
+        devices: { endpoint: process.env.REACT_APP_ENDPOINT },
+        apiVersion: process.env.REACT_APP_API_VERSION,
       },
-      lastUpdated: 'Never'                  // Placeholder for the top menu bar to indicate the data set date
+      lastUpdated: 'Never'                      // Placeholder for the top menu bar to indicate the data set date
     };
   }
 
