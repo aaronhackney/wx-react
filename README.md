@@ -9,7 +9,7 @@ As a learning tool, I put each of these in their own directory trees and each tr
 
 ## Custom configuration  
 ### Backend  
-The express server will make API calls to the ambient weather API and will need the .env file to contain the needed settings:  
+The express server will make API calls to the ambient weather API and will need the .env file to contain the needed settings:
 In the ./backend/ folder, rename the `.env.sample` file to `.env` and replace the variables in the file with your settings.  
 ### Frontend  
 The react server will need to know the backend hostname and port. In the ./frontend/ folder, rename the `.env.sample` file to `.env` and replace the variables in the file with your settings. 
