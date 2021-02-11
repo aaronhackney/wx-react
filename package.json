@@ -7,7 +7,7 @@
     "scripts": {
         "react-dev": "yarn workspace frontend start",
         "express": "yarn workspace backend start",
-        "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\""
+        "start": "concurrently --kill-others-on-fail \"yarn backend\"  \"yarn frontend\""
     },
     "dependencies": {
         "concurrently": "^5.3.0"
