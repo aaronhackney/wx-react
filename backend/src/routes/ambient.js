@@ -1,7 +1,9 @@
 import express from 'express';
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
 const router = express.Router();
-require('dotenv').config()
 
 // TODO: move the API Keys to being loaded from a volume at runtime
 // Make the API call to ambientweather.net
@@ -12,4 +14,5 @@ router.get('/', function (req, res, next) {
         .catch(err => res.send(err));
 });
 
-module.exports = router;
+// module.exports = router;
+export default router;

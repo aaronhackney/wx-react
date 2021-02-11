@@ -1,12 +1,12 @@
 #!/usr/bin/env node
+import app from '../app';
+import debugLib from 'debug';
+import http from 'http';
 
-/**
- * Module dependencies.
- */
-
-var app = require('../app');
-var debug = require('debug')('react-backend:server');
-var http = require('http');
+const debug = debugLib('your-project-name:server');
+// var app = require('../app');
+// var debug = require('debug')('react-backend:server');
+// var http = require('http');
 
 /**
  * Get port from environment and store in Express.

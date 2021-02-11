@@ -4,6 +4,7 @@
         "frontend"
     ],
     "private": true,
+    "license": "GPL-3.0-or-later",
     "scripts": {
         "react-dev": "yarn workspace frontend start",
         "express": "yarn workspace backend start",

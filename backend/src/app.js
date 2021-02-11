@@ -1,17 +1,17 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import indexRouter from './routes/index';
+import ambientRouter from './routes/ambient';
 
-var indexRouter = require('./routes/index');
-var ambientRouter = require('./routes/ambient');
+var createError = require('http-errors');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -19,13 +19,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../dist')));
 
+console.log('Environment: ' + app.get('env'))
+
 // TODO: Disable this in prod
-// Allow CORS requests when developing on the same device
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 app.use('/', indexRouter);
 app.use('/v1/devices', ambientRouter)
@@ -46,4 +47,5 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+// module.exports = app;
+export default app;
