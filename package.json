@@ -7,7 +7,7 @@
     "license": "GPL-3.0-or-later",
     "scripts": {
         "react-dev": "yarn workspace frontend start",
-        "express": "yarn workspace backend start",
+        "express-dev": "yarn workspace backend start-dev",
         "start": "concurrently --kill-others-on-fail \"yarn backend\"  \"yarn frontend\""
     },
     "dependencies": {
