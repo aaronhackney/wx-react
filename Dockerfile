@@ -2,15 +2,12 @@
 # Stage-1 Build the app
 FROM node:alpine AS builder
 
-# Set express to production
-ENV NODE_ENV production
-
 # set working directory
 WORKDIR /app
 
 # Copy just the packsage json files
-COPY ./backend/package.json ./backend/
-COPY ./frontend/package.json ./frontend/
+COPY backend/package.json ./backend/
+COPY frontend/package.json ./frontend/
 COPY package.json ./
 
 # Install the node libraries
@@ -30,6 +27,23 @@ RUN yarn workspace backend build
 #######################################
 # Stage 2 - Get the build and run it
 FROM builder
+
+# Prepare destination directory and ensure user node owns it
+RUN mkdir -p /home/node/app/dist && chown -R node:node /home/node/app
+
+WORKDIR /home/node/app
+
+# Install only the needed production packages
+COPY package*.json ./
+COPY backend/package*.json ./backend/
+
+# Set express to production
+ENV NODE_ENV production
+RUN yarn
+
+COPY --chown=node:node --from=builder /app/backend/dist-server ./backend/dist-server
+COPY --chown=node:node --from=builder /app/dist ./dist
+COPY --chown=node:node --from=builder /app/backend/.env  ./backend/.env
 
 # Start the express server
 CMD ["yarn", "workspace", "backend", "start-prod"]
