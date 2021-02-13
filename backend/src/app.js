@@ -4,20 +4,29 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import indexRouter from './routes/index';
 import ambientRouter from './routes/ambient';
+import helmet from 'helmet';
+import fs from 'fs';
 
-var createError = require('http-errors');
+const createError = require('http-errors');
+const app = express();
 
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../../dist')));
+app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  directives:
+  {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'"],
+    styleSrc: ["'self'"],
+    fontSrc: ["'self'"],
+    imgSrc: ["'self'"],
+    objectSrc: ["'self'"],
+    reportUri: ["https://ahackney.report-uri.com/r/d/csp/enforce"]
+  }
+}));
+app.use(function (req, res, next) {
+  res.header("Report-To", "{ \"group\": \"default\", \"max_age\": 31536000, \"endpoints\": [{ \"url\": \"https://ahackney.report-uri.com/a/d/g\" }], \"include_subdomains\": true }");
+  next();
+});
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", process.env.ORIGIN);
@@ -25,6 +34,13 @@ app.use(function (req, res, next) {
   next();
 });
 
+// TODO: Log cycling/naming
+app.use(logger('common', { stream: fs.createWriteStream(process.env.LOGDIR + '/express.log', { flags: 'a' }) }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, '../../dist-frontend')));
 app.use('/', indexRouter);
 app.use('/v1/devices', ambientRouter)
 
@@ -44,5 +60,4 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-// module.exports = app;
 export default app;

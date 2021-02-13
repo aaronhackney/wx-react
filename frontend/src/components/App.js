@@ -5,12 +5,11 @@ import { Component } from 'react';
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log(process.env);
     this.state = {
       api: {                                    // This is the backend listener
         protocol: process.env.REACT_APP_PROTO,
         port: process.env.REACT_APP_PORT,
-        host: process.env.REACT_APP_HOST,
+        host: process.env.REACT_APP_API,
         devices: { endpoint: process.env.REACT_APP_ENDPOINT },
         apiVersion: process.env.REACT_APP_API_VERSION,
       },
