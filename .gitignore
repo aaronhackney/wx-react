@@ -8,6 +8,7 @@ node_modules
 .pnp.js
 yarn.lock
 dist*
+*.sh
 
 # testing
 /coverage
