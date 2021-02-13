@@ -1,4 +1,5 @@
 # WX Dashboard
+## Description
 This is an app I wrote to learn more about react, express, and a monorepo build. It retrieves the data from an "ambient weather" weather station and displays it on the screen. It refreshes the data once a minute.
 
 This app has two components:
@@ -6,6 +7,9 @@ This app has two components:
 - backend - An express app that retrieves API data and controls routes serving the react app as static, webpack optimized javsascript files
 
 As a learning tool, I put each of these in their own directory trees and each tree has it's own node/yarn workspace and package.json config. The root workspace installs all of the dependencies for both the backend workspace and the frontend workspace.
+
+## Startup
+`docker-compose up --detach`  
 
 ## Custom configuration  
 ### Backend  
@@ -20,7 +24,6 @@ In the ./backend/ folder, rename the `.env.sample` file to `.env` and replace th
 | APPKEY   | xyz098765432                  | ambientweather.net APP ID                    |
 | PORT     | 8080                          | Port listening for connections from frontend |
 | ORIGIN   | http://wx.hacksbrain.com:8080 | frontend URL (for CORS)                      |
-| LOGDIR   | /usr/local/var/log            | log files for express http server            |
 
 ### Frontend  
 The react server will need to know the backend hostname and port. In the ./frontend/ folder, rename the `.env.sample` file to `.env` and replace the variables in the file with your settings. 

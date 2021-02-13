@@ -3,8 +3,8 @@
   "version": "0.2.0",
   "scripts": {
     "start-dev": "node -r esm -r dotenv-safe/config ./src/bin/www",
-    "start-prod": "node -r dotenv-safe/config ./dist-backend/bin/www",
-    "build": "babel ./src --out-dir ./dist-backend",
+    "start-prod": "node -r dotenv-safe/config ../dist-backend/bin/www",
+    "build": "babel ./src --out-dir ../dist-backend",
     "clean": "rimraf dist-backend"
   },
   "babel": {

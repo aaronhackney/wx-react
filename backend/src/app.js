@@ -10,6 +10,9 @@ import fs from 'fs';
 const createError = require('http-errors');
 const app = express();
 
+// TODO: Log cycling/naming
+app.use(logger('common', { stream: fs.createWriteStream('../logs/express.log', { flags: 'a' }) }));
+
 app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
   directives:
@@ -34,13 +37,11 @@ app.use(function (req, res, next) {
   next();
 });
 
-// TODO: Log cycling/naming
-app.use(logger('common', { stream: fs.createWriteStream(process.env.LOGDIR + '/express.log', { flags: 'a' }) }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, '../../dist-frontend')));
+app.use(express.static(path.join(__dirname, '../dist-frontend')));
 app.use('/', indexRouter);
 app.use('/v1/devices', ambientRouter)
 

@@ -29,7 +29,8 @@ RUN yarn workspace backend build
 FROM builder
 
 # Prepare destination directory and ensure user node owns it
-RUN mkdir -p /home/node/app/dist && chown -R node:node /home/node/app
+RUN mkdir -p /home/node/app/dist-frontend && mkdir -p /home/node/app/dist-backend && mkdir -p /home/node/app/logs
+RUN chown -R node:node /home/node/app
 
 WORKDIR /home/node/app
 
@@ -41,9 +42,9 @@ COPY backend/package*.json ./backend/
 ENV NODE_ENV production
 RUN yarn
 
-COPY --chown=node:node --from=builder /app/backend/dist-server ./backend/dist-server
-COPY --chown=node:node --from=builder /app/dist ./dist
-COPY --chown=node:node --from=builder /app/backend/.env  ./backend/.env
+COPY --chown=node:node --from=builder /app/dist-backend ./dist-backend
+COPY --chown=node:node --from=builder /app/dist-frontend ./dist-frontend
+COPY --chown=node:node --from=builder /app/backend/.env*  ./backend/
 
 # Start the express server
 CMD ["yarn", "workspace", "backend", "start-prod"]
