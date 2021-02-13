@@ -11,16 +11,16 @@ As a learning tool, I put each of these in their own directory trees and each tr
 ### Backend  
 The express server will make API calls to the ambient weather API and will need the .env file to contain the needed settings:
 In the ./backend/ folder, rename the `.env.sample` file to `.env` and replace the variables in the file with your settings.
-| Variable | Sample Value                 | Meaning                                      |
-| -------- | ---------------------------- | -------------------------------------------- |
-| FQDN     | api.ambientweather.net       | Remote API FQDN                              |
-| ENDPOINT | /v1/devices                  | Remote API endpoint                          |
-| PROTO    | https                        | Protocol used to call remote API             |
-| APIKEY   | abc123456789                 | ambientweather.net API Key                   |
-| APPKEY   | xyz098765432                 | ambientweather.net APP ID                    |
-| PORT     | 8080                         | Port listening for connections from frontend |
-| ORIGIN   | http://react.mysite.com:8080 | frontend URL (for CORS)                      |
-| LOGDIR   | /usr/local/var/log           | log files for express http server            |
+| Variable | Sample Value                  | Meaning                                      |
+| -------- | ----------------------------- | -------------------------------------------- |
+| FQDN     | api.ambientweather.net        | Remote API FQDN                              |
+| ENDPOINT | /v1/devices                   | Remote API endpoint                          |
+| PROTO    | https                         | Protocol used to call remote API             |
+| APIKEY   | abc123456789                  | ambientweather.net API Key                   |
+| APPKEY   | xyz098765432                  | ambientweather.net APP ID                    |
+| PORT     | 8080                          | Port listening for connections from frontend |
+| ORIGIN   | http://wx.hacksbrain.com:8080 | frontend URL (for CORS)                      |
+| LOGDIR   | /usr/local/var/log            | log files for express http server            |
 
 ### Frontend  
 The react server will need to know the backend hostname and port. In the ./frontend/ folder, rename the `.env.sample` file to `.env` and replace the variables in the file with your settings. 
