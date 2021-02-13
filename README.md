@@ -19,18 +19,20 @@ In the ./backend/ folder, rename the `.env.sample` file to `.env` and replace th
 | APIKEY   | abc123456789                 | ambientweather.net API Key                   |
 | APPKEY   | xyz098765432                 | ambientweather.net APP ID                    |
 | PORT     | 8080                         | Port listening for connections from frontend |
-| ORIGIN   | http://react.mysite.com:8080 | frontend URL (CORS)                          |
+| ORIGIN   | http://react.mysite.com:8080 | frontend URL (for CORS)                      |
+| LOGDIR   | /usr/local/var/log           | log files for express http server            |
 
 ### Frontend  
 The react server will need to know the backend hostname and port. In the ./frontend/ folder, rename the `.env.sample` file to `.env` and replace the variables in the file with your settings. 
-| Variable              | Sample Value       | Meaning                 |
-| --------------------- | ------------------ | ----------------------- |
-| BUILD_PATH            | ../dist            | React webpack location  |
-| REACT_APP_PORT        | 8082               | React webapp port       |
-| REACT_APP_PROTO       | http               | Front end protocol      |
-| REACT_APP_HOST        | api.hacksbrain.com | FQDN of the react app   |
-| REACT_APP_ENDPOINT    | devices            | express server endpoint |
-| REACT_APP_API_VERSION | 1                  | API version             |
+| Variable              | Sample Value      | Meaning                                              |
+| --------------------- | ----------------- | ---------------------------------------------------- |
+| BUILD_PATH            | ../dist-frontend  | React webpack location                               |
+| REACT_APP_PORT        | 8082              | React webapp port                                    |
+| REACT_APP_PROTO       | http              | Front end protocol                                   |
+| REACT_APP_ENDPOINT    | devices           | express server endpoint                              |
+| REACT_APP_API_VERSION | 1                 | API version                                          |
+| INLINE_RUNTIME_CHUNK  | false             | Don't compile REACT inline (Content Security Policy) |
+| REACT_APP_API         | wx.hacksbrain.com | backend express server                               |
 
 
 ## Node module installation:
